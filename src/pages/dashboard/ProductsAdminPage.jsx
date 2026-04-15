@@ -201,7 +201,7 @@ function ProductsAdminPage() {
         <Box>
           <Typography variant="h3">Gestión de productos</Typography>
           <Typography color="text.secondary">
-            CRUD visual con persistencia local para catálogo premium.
+            Administración del catálogo con persistencia local y foco en operación comercial.
           </Typography>
         </Box>
         <Button
@@ -215,7 +215,7 @@ function ProductsAdminPage() {
           Crear producto
         </Button>
       </Stack>
-      <Card sx={{ borderRadius: 5 }}>
+      <Card className="dashboard-panel" sx={{ borderRadius: 4 }}>
         <CardContent sx={{ p: 3 }}>
           <Stack spacing={2}>
             <TextField

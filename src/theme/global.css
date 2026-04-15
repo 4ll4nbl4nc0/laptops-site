@@ -1,19 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-  color-scheme: dark;
-  --bg: #0a0f14;
-  --bg-soft: #121922;
-  --surface: rgba(18, 25, 34, 0.88);
-  --surface-strong: #171f2b;
-  --surface-light: #f4f7fb;
-  --text: #f3efe6;
-  --text-muted: #a9b0b8;
-  --line: rgba(243, 239, 230, 0.12);
-  --primary: #d6b06b;
-  --secondary: #6aa7ad;
-  --success: #68c08b;
-  --warning: #d39a4d;
+  color-scheme: light;
+  --bg: #fbf6ef;
+  --bg-soft: #f7f0e6;
+  --surface: rgba(255, 253, 249, 0.82);
+  --surface-strong: rgba(255, 251, 245, 0.96);
+  --surface-light: #fffdf9;
+  --text: #1f2a33;
+  --text-muted: #6f7b84;
+  --line: rgba(31, 42, 51, 0.08);
+  --primary: #ea7a5a;
+  --secondary: #2f7f79;
+  --success: #4d8b63;
+  --warning: #d5924a;
+  --danger: #d46b71;
 }
 
 * {
@@ -28,9 +29,9 @@ body {
   margin: 0;
   font-family: 'Manrope', 'Segoe UI', sans-serif;
   background:
-    radial-gradient(circle at top, rgba(214, 176, 107, 0.16), transparent 24%),
-    radial-gradient(circle at 85% 10%, rgba(106, 167, 173, 0.12), transparent 22%),
-    linear-gradient(180deg, #0a0f14 0%, #0b1218 34%, #0e151d 100%);
+    radial-gradient(circle at top left, rgba(234, 122, 90, 0.12), transparent 22%),
+    radial-gradient(circle at 88% 8%, rgba(47, 127, 121, 0.12), transparent 24%),
+    linear-gradient(180deg, #fbf6ef 0%, #f9f2e8 40%, #f6efe4 100%);
   color: var(--text);
   min-height: 100vh;
 }
@@ -45,10 +46,10 @@ a {
 }
 
 .glass-panel {
-  background: rgba(10, 18, 32, 0.74);
+  background: rgba(255, 252, 247, 0.74);
   border: 1px solid var(--line);
   backdrop-filter: blur(18px);
-  box-shadow: 0 24px 60px rgba(4, 10, 22, 0.32);
+  box-shadow: 0 18px 50px rgba(177, 141, 108, 0.14);
 }
 
 .noise-overlay::before {
@@ -68,12 +69,23 @@ a {
   overflow: hidden;
 }
 
+.page-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(234, 122, 90, 0.06), transparent 20%),
+    radial-gradient(circle at 88% 16%, rgba(47, 127, 121, 0.05), transparent 20%);
+  z-index: 0;
+}
+
 .section-padding {
-  padding: 88px 0;
+  padding: 96px 0;
 }
 
 .text-gradient {
-  background: linear-gradient(120deg, #f8f4ec 0%, #d6b06b 45%, #8bc0c5 100%);
+  background: linear-gradient(120deg, #ea7a5a 0%, #ef9f70 42%, #2f7f79 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -81,42 +93,69 @@ a {
 
 .soft-light-card {
   background:
-    radial-gradient(circle at top right, rgba(214, 176, 107, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(23, 31, 43, 0.95), rgba(12, 17, 23, 0.98));
+    radial-gradient(circle at top right, rgba(234, 122, 90, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(248, 242, 234, 0.98));
 }
 
 .metric-chip {
-  border: 1px solid rgba(214, 176, 107, 0.24);
-  background: rgba(214, 176, 107, 0.08);
+  border: 1px solid rgba(31, 42, 51, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
 }
 
 .dashboard-grid .MuiDataGrid-root {
-  border: 1px solid rgba(243, 239, 230, 0.08);
-  background: rgba(14, 19, 26, 0.88);
-  border-radius: 24px;
+  border: 1px solid rgba(31, 42, 51, 0.08);
+  background: rgba(255, 253, 249, 0.92);
+  border-radius: 22px;
 }
 
 .dashboard-grid .MuiDataGrid-columnHeaders {
-  background: rgba(214, 176, 107, 0.08);
+  background: rgba(47, 127, 121, 0.06);
 }
 
 .dashboard-grid .MuiDataGrid-cell {
-  border-top: 1px solid rgba(243, 239, 230, 0.06);
+  border-top: 1px solid rgba(31, 42, 51, 0.05);
 }
 
 .dashboard-grid .MuiDataGrid-footerContainer {
-  border-top: 1px solid rgba(243, 239, 230, 0.08);
+  border-top: 1px solid rgba(31, 42, 51, 0.06);
 }
 
 .dashboard-accent {
   background:
-    radial-gradient(circle at top left, rgba(214, 176, 107, 0.18), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(106, 167, 173, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(20, 27, 36, 0.96), rgba(11, 15, 21, 0.98));
+    radial-gradient(circle at top left, rgba(234, 122, 90, 0.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(47, 127, 121, 0.1), transparent 26%),
+    linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(247, 239, 229, 0.99));
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.elevated-border {
+  border: 1px solid rgba(31, 42, 51, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 16px 42px rgba(177, 141, 108, 0.12);
+}
+
+.dashboard-shell {
+  background:
+    radial-gradient(circle at top left, rgba(234, 122, 90, 0.08), transparent 20%),
+    linear-gradient(180deg, #fcf7f0 0%, #f8f1e8 100%);
+}
+
+.dashboard-panel {
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(248, 242, 234, 0.98));
+  border: 1px solid rgba(31, 42, 51, 0.06);
+  box-shadow: 0 18px 48px rgba(177, 141, 108, 0.1);
 }
 
 @media (max-width: 899px) {
   .section-padding {
-    padding: 72px 0;
+    padding: 74px 0;
   }
 }

@@ -10,8 +10,8 @@ function ProductSpecsTable({ specs }) {
             sx={{
               p: 2,
               borderRadius: 4,
-              border: '1px solid rgba(220, 231, 255, 0.08)',
-              bgcolor: 'rgba(255,255,255,0.02)',
+              border: '1px solid rgba(31, 42, 51, 0.08)',
+              bgcolor: 'rgba(255,255,255,0.72)',
               height: '100%',
             }}
           >

@@ -10,10 +10,10 @@ function StoreLayout() {
   return (
     <Box className="page-shell">
       <AppHeader />
-      <Box component="main" sx={{ minHeight: '100vh', pt: { xs: 10, md: 12 } }}>
+      <Box component="main" sx={{ minHeight: '100vh', pt: { xs: 11, md: 13 }, position: 'relative', zIndex: 1 }}>
         <Outlet />
       </Box>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <AppFooter />
       </Container>
     </Box>

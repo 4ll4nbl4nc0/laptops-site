@@ -9,7 +9,7 @@ function AuthLayout() {
         display: 'grid',
         placeItems: 'center',
         background:
-          'radial-gradient(circle at top, rgba(76,201,240,0.18), transparent 28%), radial-gradient(circle at bottom right, rgba(123,97,255,0.2), transparent 24%), #07111f',
+          'radial-gradient(circle at top, rgba(234,122,90,0.14), transparent 28%), radial-gradient(circle at bottom right, rgba(47,127,121,0.12), transparent 24%), #fbf6ef',
       }}
     >
       <Container maxWidth="sm">

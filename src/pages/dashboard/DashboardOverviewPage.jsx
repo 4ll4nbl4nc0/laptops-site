@@ -25,7 +25,7 @@ import { formatCurrency } from '../../utils/format'
 
 function KpiCard({ title, value, helper, tone = 'primary' }) {
   return (
-    <Card sx={{ borderRadius: 5, height: '100%' }}>
+    <Card className="dashboard-panel" sx={{ borderRadius: 4, height: '100%' }}>
       <CardContent sx={{ p: 3 }}>
         <Typography color="text.secondary" variant="body2">
           {title}
@@ -43,7 +43,7 @@ function KpiCard({ title, value, helper, tone = 'primary' }) {
 
 function ChartCard({ title, children }) {
   return (
-    <Card sx={{ borderRadius: 5, height: '100%' }}>
+    <Card className="dashboard-panel" sx={{ borderRadius: 4, height: '100%' }}>
       <CardContent sx={{ p: 3, height: '100%' }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           {title}
@@ -65,7 +65,7 @@ function DashboardOverviewPage() {
 
   return (
     <Stack spacing={3}>
-      <Card sx={{ borderRadius: 6 }} className="dashboard-accent">
+      <Card sx={{ borderRadius: 4 }} className="dashboard-accent elevated-border">
         <CardContent sx={{ p: { xs: 3, md: 4 } }}>
           <Grid container spacing={3} alignItems="center">
             <Grid size={{ xs: 12, lg: 8 }}>
@@ -76,15 +76,15 @@ function DashboardOverviewPage() {
                   variant="outlined"
                   sx={{ alignSelf: 'flex-start' }}
                 />
-                <Typography variant="h3">Dashboard Overview</Typography>
+                <Typography variant="h3">Executive Overview</Typography>
                 <Typography color="text.secondary" maxWidth={760}>
-                  Vista ejecutiva del prototipo: catálogo activo, flujo de reservas, salud
-                  del inventario y señales comerciales para una operación de hardware premium.
+                  Vista ejecutiva del negocio: catálogo activo, reservas, stock y señales
+                  comerciales clave para una operación de hardware de alto valor.
                 </Typography>
               </Stack>
             </Grid>
             <Grid size={{ xs: 12, lg: 4 }}>
-              <Card sx={{ borderRadius: 5 }}>
+              <Card className="dashboard-panel" sx={{ borderRadius: 4 }}>
                 <CardContent sx={{ p: 3 }}>
                   <Stack spacing={1.5}>
                     <Typography fontWeight={700}>Pulse comercial</Typography>
@@ -98,7 +98,7 @@ function DashboardOverviewPage() {
                       variant="determinate"
                       value={Math.min(100, metrics.confirmedReservations * 10 + 24)}
                       color="secondary"
-                      sx={{ height: 8, borderRadius: 999 }}
+                      sx={{ height: 7, borderRadius: 999 }}
                     />
                   </Stack>
                 </CardContent>
@@ -131,12 +131,12 @@ function DashboardOverviewPage() {
           <ChartCard title="Reservas por mes">
             <ResponsiveContainer>
               <LineChart data={analytics.reservationsByMonth}>
-                <CartesianGrid stroke="rgba(220,231,255,0.08)" />
-                <XAxis dataKey="month" stroke="#9db0cc" />
-                <YAxis stroke="#9db0cc" />
+                <CartesianGrid stroke="rgba(31,42,51,0.08)" />
+                <XAxis dataKey="month" stroke="#8f8a81" />
+                <YAxis stroke="#8f8a81" />
                 <Tooltip />
-                <Line type="monotone" dataKey="reservas" stroke="#4cc9f0" strokeWidth={3} />
-                <Line type="monotone" dataKey="confirmadas" stroke="#7b61ff" strokeWidth={3} />
+                <Line type="monotone" dataKey="reservas" stroke="#c9a86a" strokeWidth={3} />
+                <Line type="monotone" dataKey="confirmadas" stroke="#8d9ca8" strokeWidth={3} />
               </LineChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -145,11 +145,11 @@ function DashboardOverviewPage() {
           <ChartCard title="Stock por categoría">
             <ResponsiveContainer>
               <BarChart data={analytics.stockByCategory}>
-                <CartesianGrid stroke="rgba(220,231,255,0.08)" />
-                <XAxis dataKey="category" stroke="#9db0cc" />
-                <YAxis stroke="#9db0cc" />
+                <CartesianGrid stroke="rgba(31,42,51,0.08)" />
+                <XAxis dataKey="category" stroke="#8f8a81" />
+                <YAxis stroke="#8f8a81" />
                 <Tooltip />
-                <Bar dataKey="stock" fill="#4cc9f0" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="stock" fill="#c9a86a" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -158,7 +158,7 @@ function DashboardOverviewPage() {
 
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, lg: 5 }}>
-          <Card sx={{ borderRadius: 5, height: '100%' }}>
+          <Card className="dashboard-panel" sx={{ borderRadius: 4, height: '100%' }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" sx={{ mb: 2 }}>
                 Reservas recientes
@@ -169,9 +169,9 @@ function DashboardOverviewPage() {
                     key={reservation.id}
                     sx={{
                       p: 2,
-                      borderRadius: 4,
-                      border: '1px solid rgba(243, 239, 230, 0.08)',
-                      bgcolor: 'rgba(255,255,255,0.02)',
+                      borderRadius: 3,
+                      border: '1px solid rgba(31, 42, 51, 0.08)',
+                      bgcolor: 'rgba(255,255,255,0.66)',
                     }}
                   >
                     <Stack direction="row" justifyContent="space-between" spacing={2}>
@@ -190,7 +190,7 @@ function DashboardOverviewPage() {
           </Card>
         </Grid>
         <Grid size={{ xs: 12, lg: 7 }}>
-          <Card sx={{ borderRadius: 5, height: '100%' }}>
+          <Card className="dashboard-panel" sx={{ borderRadius: 4, height: '100%' }}>
             <CardContent sx={{ p: 3 }}>
               <Typography variant="h6" sx={{ mb: 2 }}>
                 Productos con mayor tracción
@@ -211,7 +211,7 @@ function DashboardOverviewPage() {
                       variant="determinate"
                       value={Math.min(100, product.views / 20)}
                       color="secondary"
-                      sx={{ mt: 1.25, height: 8, borderRadius: 999 }}
+                      sx={{ mt: 1.25, height: 7, borderRadius: 999 }}
                     />
                   </Box>
                 ))}

@@ -16,6 +16,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material'
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded'
 import { useState } from 'react'
@@ -36,24 +37,23 @@ const dashboardLinks = [
 
 function Sidebar({ onNavigate }) {
   return (
-    <Box sx={{ width: 280, p: 2.5, display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <Box sx={{ width: 288, p: 2.5, display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Box
-        className="dashboard-accent"
+        className="dashboard-panel"
         sx={{
           p: 2.5,
-          borderRadius: 5,
-          border: '1px solid rgba(243, 239, 230, 0.08)',
+          borderRadius: 4,
           mb: 3,
         }}
       >
-        <Typography variant="overline" sx={{ letterSpacing: 2, color: 'primary.main' }}>
+        <Typography variant="overline" sx={{ letterSpacing: 1.6, color: 'primary.main' }}>
           AstraCompute
         </Typography>
         <Typography variant="h5" sx={{ mt: 1 }}>
-          Commerce Control
+          Commerce Console
         </Typography>
         <Typography color="text.secondary" sx={{ mt: 1 }}>
-          Panel premium para catálogo, reservas, stock y operación comercial.
+          Operación de catálogo, inventario, clientes y reservas en una sola vista.
         </Typography>
       </Box>
       <List sx={{ display: 'grid', gap: 1 }}>
@@ -65,18 +65,21 @@ function Sidebar({ onNavigate }) {
             onClick={onNavigate}
             sx={{
               borderRadius: 3,
+              px: 1.8,
+              border: '1px solid transparent',
               '&.active': {
-                bgcolor: 'rgba(214, 176, 107, 0.12)',
-                border: '1px solid rgba(214, 176, 107, 0.18)',
+                bgcolor: 'rgba(234, 122, 90, 0.1)',
+                border: '1px solid rgba(234, 122, 90, 0.14)',
               },
             }}
           >
             <ListItemText primary={label} />
+            <ChevronRightRoundedIcon sx={{ fontSize: 18, opacity: 0.55 }} />
           </ListItemButton>
         ))}
       </List>
       <Box sx={{ mt: 'auto', pt: 3 }}>
-        <Chip label="Acceso por ruta: /dashboard" color="primary" variant="outlined" />
+        <Chip label="Panel interno" color="primary" variant="outlined" />
       </Box>
     </Box>
   )
@@ -91,16 +94,16 @@ function DashboardLayout() {
   const user = useAppStore((state) => state.auth.user)
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box className="dashboard-shell" sx={{ display: 'flex', minHeight: '100vh', bgcolor: 'background.default' }}>
       {isDesktop ? (
         <Box
           sx={{
             width: 290,
-            borderRight: '1px solid rgba(243, 239, 230, 0.08)',
+            borderRight: '1px solid rgba(31, 42, 51, 0.06)',
             position: 'sticky',
             top: 0,
             height: '100vh',
-            bgcolor: 'rgba(10, 15, 20, 0.98)',
+            bgcolor: 'rgba(255, 250, 243, 0.92)',
           }}
         >
           <Sidebar />
@@ -116,8 +119,9 @@ function DashboardLayout() {
           color="transparent"
           elevation={0}
           sx={{
-            backdropFilter: 'blur(22px)',
-            borderBottom: '1px solid rgba(243, 239, 230, 0.08)',
+            backdropFilter: 'blur(18px)',
+            borderBottom: '1px solid rgba(31, 42, 51, 0.06)',
+            background: 'linear-gradient(180deg, rgba(251,246,239,0.88), rgba(251,246,239,0.72))',
           }}
         >
           <Toolbar sx={{ gap: 2 }}>
@@ -129,11 +133,11 @@ function DashboardLayout() {
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="h6">Control Center</Typography>
               <Typography variant="body2" color="text.secondary">
-                Operación comercial, inventario, clientes y reservas.
+                Seguimiento comercial, operación y control del showroom.
               </Typography>
             </Box>
             <Stack direction="row" alignItems="center" spacing={1.5}>
-              <Avatar sx={{ bgcolor: 'primary.main', color: 'background.default' }}>
+              <Avatar sx={{ bgcolor: 'primary.main', color: '#fffdf9' }}>
                 {user?.name?.[0] || 'A'}
               </Avatar>
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -159,7 +163,7 @@ function DashboardLayout() {
           <Outlet />
           <Divider sx={{ my: 5 }} />
           <Typography color="text.secondary" variant="body2">
-            Demo frontend premium con persistencia local para propuesta comercial.
+            Consola administrativa demo con persistencia local y foco en operación comercial.
           </Typography>
         </Container>
       </Box>

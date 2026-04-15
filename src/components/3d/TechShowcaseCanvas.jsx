@@ -17,7 +17,7 @@ function LaptopModel() {
         </mesh>
         <mesh position={[0, 0.65, -0.84]} rotation={[-1.05, 0, 0]}>
           <planeGeometry args={[2.38, 1.45]} />
-          <meshStandardMaterial color="#4cc9f0" emissive="#274e77" emissiveIntensity={0.8} />
+          <meshStandardMaterial color="#ea7a5a" emissive="#f3c4aa" emissiveIntensity={0.5} />
         </mesh>
       </group>
     </Float>
@@ -36,8 +36,8 @@ function TechShowcaseCanvas() {
           borderRadius: 6,
           p: 4,
           background:
-            'radial-gradient(circle at top right, rgba(76, 201, 240, 0.22), transparent 28%), linear-gradient(180deg, #0e1728, #09101d)',
-          border: '1px solid rgba(220, 231, 255, 0.1)',
+            'radial-gradient(circle at top right, rgba(234, 122, 90, 0.16), transparent 28%), linear-gradient(180deg, #fffaf4, #f7efe5)',
+          border: '1px solid rgba(31, 42, 51, 0.08)',
         }}
       >
         <Typography variant="overline" color="primary.main">
@@ -57,10 +57,10 @@ function TechShowcaseCanvas() {
   return (
     <Box sx={{ height: 420, borderRadius: 6, overflow: 'hidden' }}>
       <Canvas camera={{ position: [0, 1.5, 4.2], fov: 42 }}>
-        <color attach="background" args={['#09111f']} />
-        <ambientLight intensity={1.1} />
+        <color attach="background" args={['#f8efe6']} />
+        <ambientLight intensity={1.25} />
         <directionalLight position={[4, 5, 4]} intensity={1.5} />
-        <pointLight position={[-3, 1, 1]} color="#4cc9f0" intensity={20} />
+        <pointLight position={[-3, 1, 1]} color="#ea7a5a" intensity={10} />
         <LaptopModel />
         <OrbitControls enablePan={false} enableZoom={false} autoRotate autoRotateSpeed={1.8} />
       </Canvas>

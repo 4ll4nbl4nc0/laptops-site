@@ -22,6 +22,7 @@ import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useCatalogProducts } from '../../app/store'
 import AppBreadcrumbs from '../../components/common/AppBreadcrumbs'
+import MotionReveal from '../../components/common/MotionReveal'
 import SectionHeading from '../../components/common/SectionHeading'
 import FiltersPanel from '../../components/ecommerce/FiltersPanel'
 import ProductCard from '../../components/ecommerce/ProductCard'
@@ -147,60 +148,73 @@ function CatalogPage() {
   return (
     <Container maxWidth="xl" className="section-padding">
       <AppBreadcrumbs items={[{ label: 'Inicio', to: '/' }, { label: 'Catálogo' }]} />
-      <SectionHeading
-        eyebrow="Storefront"
-        title="Catálogo premium de computadoras y setups"
-        description="Filtros profundos para comparar hardware real, ordenar por valor y convertir interés en una solicitud de reserva más informada."
-      />
+      <MotionReveal>
+        <Card className="soft-light-card elevated-border" sx={{ borderRadius: '28px', mb: 4 }}>
+          <CardContent sx={{ p: { xs: 3, md: 4.5 } }}>
+            <Grid container spacing={3} alignItems="end">
+              <Grid size={{ xs: 12, lg: 8 }}>
+                <SectionHeading
+                  eyebrow="Storefront"
+                  title="Catálogo premium de computadoras y setups"
+                  description="Más ordenado, más editorial y más vendible: una experiencia de catálogo pensada para presentar producto con mejor percepción de valor."
+                />
+
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  <Typography color="text.secondary">{filteredProducts.length} resultados</Typography>
+                  {appliedFilters.slice(0, 6).map((item) => (
+                    <Chip
+                      key={`${item.key}-${item.value}`}
+                      size="small"
+                      label={item.key === 'useCase' ? useCaseLabelMap[item.value] || item.value : item.value}
+                      color="primary"
+                      variant="outlined"
+                      onDelete={() => removeAppliedFilter(item.key, item.value)}
+                    />
+                  ))}
+                  {appliedFilters.length > 6 ? (
+                    <Chip size="small" label={`+${appliedFilters.length - 6} filtros`} variant="outlined" />
+                  ) : null}
+                </Stack>
+              </Grid>
+
+              <Grid size={{ xs: 12, lg: 4 }}>
+                <Stack direction="row" spacing={1.5} justifyContent={{ xs: 'flex-start', lg: 'flex-end' }}>
+                  {isMobile && (
+                    <Button variant="outlined" startIcon={<FilterListRoundedIcon />} onClick={() => setOpenFilters(true)}>
+                      Filtros
+                    </Button>
+                  )}
+                  <FormControl size="small" sx={{ minWidth: 220 }}>
+                    <InputLabel>Ordenar</InputLabel>
+                    <Select
+                      value={sort}
+                      label="Ordenar"
+                      onChange={(event) => setSort(event.target.value)}
+                      startAdornment={<SortRoundedIcon sx={{ mr: 1 }} />}
+                    >
+                      <MenuItem value="popular">Más populares</MenuItem>
+                      <MenuItem value="rating">Mejor valorados</MenuItem>
+                      <MenuItem value="newest">Más nuevos</MenuItem>
+                      <MenuItem value="priceAsc">Precio ascendente</MenuItem>
+                      <MenuItem value="priceDesc">Precio descendente</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      </MotionReveal>
 
       <Grid container spacing={3}>
         {!isMobile && (
-          <Grid size={{ md: 3 }}>
-            <Card sx={{ borderRadius: 5, position: 'sticky', top: 112 }}>
+          <Grid size={{ md: 4, lg: 3 }}>
+            <Card sx={{ borderRadius: '24px', position: 'sticky', top: 116, background: 'rgba(255,253,249,0.9)' }}>
               <CardContent sx={{ p: 3 }}>{panel}</CardContent>
             </Card>
           </Grid>
         )}
-        <Grid size={{ xs: 12, md: 9 }}>
-          <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} justifyContent="space-between" sx={{ mb: 3 }}>
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-              <Typography color="text.secondary">
-                {filteredProducts.length} resultados
-              </Typography>
-              {appliedFilters.map((item) => (
-                <Chip
-                  key={`${item.key}-${item.value}`}
-                  label={item.key === 'useCase' ? useCaseLabelMap[item.value] || item.value : item.value}
-                  color="primary"
-                  variant="outlined"
-                  onDelete={() => removeAppliedFilter(item.key, item.value)}
-                />
-              ))}
-            </Stack>
-            <Stack direction="row" spacing={1.5}>
-              {isMobile && (
-                <Button variant="outlined" startIcon={<FilterListRoundedIcon />} onClick={() => setOpenFilters(true)}>
-                  Filtros
-                </Button>
-              )}
-              <FormControl size="small" sx={{ minWidth: 210 }}>
-                <InputLabel>Ordenar</InputLabel>
-                <Select
-                  value={sort}
-                  label="Ordenar"
-                  onChange={(event) => setSort(event.target.value)}
-                  startAdornment={<SortRoundedIcon sx={{ mr: 1 }} />}
-                >
-                  <MenuItem value="popular">Más populares</MenuItem>
-                  <MenuItem value="rating">Mejor valorados</MenuItem>
-                  <MenuItem value="newest">Más nuevos</MenuItem>
-                  <MenuItem value="priceAsc">Precio ascendente</MenuItem>
-                  <MenuItem value="priceDesc">Precio descendente</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
-          </Stack>
-
+        <Grid size={{ xs: 12, md: 8, lg: 9 }}>
           <Grid container spacing={3}>
             {filteredProducts.slice(0, visibleCount).map((product) => (
               <Grid
@@ -216,14 +230,14 @@ function CatalogPage() {
             ))}
           </Grid>
 
-          <Card sx={{ borderRadius: 5, mt: 4 }} className="dashboard-accent">
+          <Card sx={{ borderRadius: '24px', mt: 4 }} className="dashboard-accent">
             <CardContent sx={{ p: 3 }}>
               <Stack spacing={1.5}>
-                <Typography variant="h6">Filtros de plataforma y especificaciones</Typography>
+                <Typography variant="h6">Catálogo más ordenado y presentable</Typography>
                 <Typography color="text.secondary">
-                  Ahora puedes segmentar el catálogo por sistema operativo `Windows` y
-                  `macOS`, además de RAM, almacenamiento, GPU, resolución, pantalla y uso
-                  recomendado para una experiencia más seria y consultiva.
+                  La estructura visual ahora da más aire al producto, mejora la lectura de precio
+                  y hace que la navegación entre filtros, resultados y acciones se sienta más
+                  propia de un e-commerce comercial.
                 </Typography>
               </Stack>
             </CardContent>

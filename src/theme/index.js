@@ -2,64 +2,72 @@ import { alpha, createTheme } from '@mui/material/styles'
 
 export const appTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#d6b06b',
-      light: '#ead1a3',
-      dark: '#a78442',
+      main: '#ea7a5a',
+      light: '#f2a085',
+      dark: '#c95d3f',
     },
     secondary: {
-      main: '#6aa7ad',
-      light: '#8fc7cc',
-      dark: '#3d767c',
+      main: '#2f7f79',
+      light: '#63a7a2',
+      dark: '#235f5a',
     },
     background: {
-      default: '#0a0f14',
-      paper: '#121922',
+      default: '#fbf6ef',
+      paper: '#fffdf9',
     },
     success: {
-      main: '#68c08b',
+      main: '#4d8b63',
     },
     warning: {
-      main: '#d39a4d',
+      main: '#d5924a',
     },
     error: {
-      main: '#d96b79',
+      main: '#d46b71',
     },
     info: {
-      main: '#78a9d4',
+      main: '#6086a5',
     },
     text: {
-      primary: '#f3efe6',
-      secondary: '#a9b0b8',
+      primary: '#1f2a33',
+      secondary: '#6f7b84',
     },
-    divider: alpha('#f3efe6', 0.1),
+    divider: alpha('#1f2a33', 0.08),
   },
   shape: {
-    borderRadius: 18,
+    borderRadius: 4,
   },
   typography: {
     fontFamily: '"Manrope", "Segoe UI", sans-serif',
     h1: {
-      fontFamily: '"Space Grotesk", "Manrope", sans-serif',
-      fontWeight: 700,
+      fontFamily: '"Plus Jakarta Sans", "Manrope", sans-serif',
+      fontWeight: 800,
       letterSpacing: '-0.04em',
     },
     h2: {
-      fontFamily: '"Space Grotesk", "Manrope", sans-serif',
-      fontWeight: 700,
+      fontFamily: '"Plus Jakarta Sans", "Manrope", sans-serif',
+      fontWeight: 800,
       letterSpacing: '-0.03em',
     },
     h3: {
-      fontFamily: '"Space Grotesk", "Manrope", sans-serif',
-      fontWeight: 700,
+      fontFamily: '"Plus Jakarta Sans", "Manrope", sans-serif',
+      fontWeight: 800,
     },
     h4: {
-      fontFamily: '"Space Grotesk", "Manrope", sans-serif',
+      fontFamily: '"Plus Jakarta Sans", "Manrope", sans-serif',
+      fontWeight: 800,
+    },
+    h5: {
+      fontFamily: '"Plus Jakarta Sans", "Manrope", sans-serif',
       fontWeight: 700,
     },
     button: {
       textTransform: 'none',
+      fontWeight: 700,
+      letterSpacing: '-0.01em',
+    },
+    overline: {
       fontWeight: 700,
     },
   },
@@ -67,9 +75,18 @@ export const appTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 999,
-          paddingInline: 18,
+          borderRadius: 16,
+          paddingInline: 20,
+          minHeight: 46,
           boxShadow: 'none',
+        },
+        contained: {
+          backgroundImage: 'linear-gradient(135deg, #ea7a5a 0%, #f29a71 100%)',
+          color: '#fffdf9',
+        },
+        outlined: {
+          borderColor: alpha('#1f2a33', 0.12),
+          backgroundColor: alpha('#fffdf9', 0.72),
         },
       },
     },
@@ -77,10 +94,11 @@ export const appTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage:
-            'linear-gradient(180deg, rgba(20,27,36,0.96), rgba(12,17,23,0.98))',
-          border: `1px solid ${alpha('#f3efe6', 0.07)}`,
-          boxShadow: '0 24px 60px rgba(2, 4, 8, 0.4)',
-          backdropFilter: 'blur(20px)',
+            'linear-gradient(180deg, rgba(255,253,249,0.96), rgba(250,245,238,0.98))',
+          border: `1px solid ${alpha('#1f2a33', 0.06)}`,
+          boxShadow: '0 20px 54px rgba(163, 123, 87, 0.12)',
+          backdropFilter: 'blur(12px)',
+          borderRadius: 24,
         },
       },
     },
@@ -95,16 +113,46 @@ export const appTheme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundImage:
-            'linear-gradient(180deg, rgba(18,25,34,0.95), rgba(11,15,21,0.98))',
+          backgroundImage: 'linear-gradient(180deg, rgba(255,253,249,0.98), rgba(250,245,238,0.98))',
+        },
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        variant: 'outlined',
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 14,
+          backgroundColor: alpha('#ffffff', 0.72),
+          transition: 'all 180ms ease',
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: alpha('#ea7a5a', 0.3),
+          },
+          '&.Mui-focused': {
+            backgroundColor: alpha('#ffffff', 0.88),
+            boxShadow: `0 0 0 4px ${alpha('#ea7a5a', 0.1)}`,
+          },
+        },
+        notchedOutline: {
+          borderColor: alpha('#1f2a33', 0.08),
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
         },
       },
     },
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          background: '#0f151d',
-          borderRight: `1px solid ${alpha('#f3efe6', 0.08)}`,
+          background: '#fffaf3',
+          borderRight: `1px solid ${alpha('#1f2a33', 0.08)}`,
         },
       },
     },

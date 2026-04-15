@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Button,
   Chip,
   FormControlLabel,
@@ -78,27 +79,51 @@ function FiltersPanel({ filters, setFilters, availableFilters }) {
         ['resolution', 'Resolución'],
         ['condition', 'Condición'],
       ].map(([key, label]) => (
-        <Accordion key={key} disableGutters defaultExpanded sx={{ bgcolor: 'transparent' }}>
+        <Accordion
+          key={key}
+          disableGutters
+          defaultExpanded={['category', 'brand', 'os', 'useCase'].includes(key)}
+          sx={{
+            bgcolor: 'transparent',
+            border: '1px solid rgba(31,42,51,0.08)',
+            borderRadius: '18px !important',
+            overflow: 'hidden',
+            '&:before': { display: 'none' },
+          }}
+        >
           <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
             <Typography fontWeight={700}>{label}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, maxHeight: 160, overflowY: 'auto', pr: 0.5 }}>
               {(availableFilters[key] || []).map((value) => (
                 <Chip
                   key={value}
+                  size="small"
                   label={labelMap[value] || value}
                   clickable
                   color={filters[key].includes(value) ? 'primary' : 'default'}
+                  variant={filters[key].includes(value) ? 'filled' : 'outlined'}
                   onClick={() => toggleValue(key, value)}
+                  sx={{ fontWeight: 600 }}
                 />
               ))}
-            </Stack>
+            </Box>
           </AccordionDetails>
         </Accordion>
       ))}
 
-      <Accordion disableGutters defaultExpanded sx={{ bgcolor: 'transparent' }}>
+      <Accordion
+        disableGutters
+        defaultExpanded
+        sx={{
+          bgcolor: 'transparent',
+          border: '1px solid rgba(31,42,51,0.08)',
+          borderRadius: '18px !important',
+          overflow: 'hidden',
+          '&:before': { display: 'none' },
+        }}
+      >
         <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
           <Typography fontWeight={700}>Precio</Typography>
         </AccordionSummary>
@@ -129,6 +154,7 @@ function FiltersPanel({ filters, setFilters, availableFilters }) {
           />
         }
         label="Solo disponibilidad inmediata"
+        sx={{ mx: 0 }}
       />
 
       <RadioGroup

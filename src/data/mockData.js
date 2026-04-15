@@ -1,4 +1,8 @@
-import { createProductVisual } from '../utils/productVisuals'
+import {
+  createBrandVisual,
+  getCategoryPhotos,
+  getProductPhotos,
+} from '../utils/productVisuals'
 import { slugify } from '../utils/format'
 
 const categoryConfig = [
@@ -31,21 +35,21 @@ const reviewPool = [
     role: 'Diseñadora UX',
     rating: 5,
     comment:
-      'La pantalla y el rendimiento se sienten de gama alta. Ideal para trabajo visual y multitarea intensa.',
+      'La pantalla, el color y la fluidez transmiten una sensación claramente premium. Ideal para trabajo visual, presentaciones y multitarea intensa.',
   },
   {
     author: 'Carlos P.',
     role: 'IT Manager',
     rating: 4,
     comment:
-      'Muy buena relación entre potencia, construcción y soporte. La ficha técnica está clara y ayuda muchísimo.',
+      'Muy buena relación entre potencia, construcción y soporte. La ficha técnica está bien presentada y facilita tomar decisiones sin perder tiempo.',
   },
   {
     author: 'Andrés V.',
     role: 'Streamer',
     rating: 5,
     comment:
-      'Corre juegos y edición sin drama. El equipo transmite una sensación premium desde el primer vistazo.',
+      'Corre juegos y edición con mucha solvencia. Se nota como un equipo pensado para impresionar tanto en rendimiento como en diseño.',
   },
 ]
 
@@ -65,8 +69,6 @@ function makeProduct(config, index) {
   const price = config.price
   const promoPrice = config.promo ? Math.round(price * 0.88) : null
   const stock = config.stock
-  const categoryAccent =
-    categoryConfig.find((item) => item.id === config.category)?.accent || 'gaming'
 
   return {
     id: `prod-${index + 1}`,
@@ -91,7 +93,7 @@ function makeProduct(config, index) {
     highlights: buildHighlights(config.useCase),
     description:
       config.description ||
-      'Equipo seleccionado para usuarios que valoran potencia, confiabilidad y una experiencia premium en productividad, gaming o creación.',
+      'Equipo seleccionado para usuarios que buscan rendimiento sólido, construcción cuidada y una experiencia premium para productividad, creación o gaming sin compromisos.',
     technicalSpecs: {
       processor: config.processor,
       ram: config.ram,
@@ -114,11 +116,7 @@ function makeProduct(config, index) {
       config.gpu,
       config.display,
     ],
-    visuals: [
-      createProductVisual(config.name, config.category, categoryAccent),
-      createProductVisual(`${config.brand} ${config.subcategory}`, config.brand, categoryAccent),
-      createProductVisual(config.processor, config.gpu, categoryAccent),
-    ],
+    visuals: getProductPhotos(config.category, index),
     reviews: reviewPool,
     views: config.views,
     reservationCount: config.reservationCount,
@@ -957,19 +955,24 @@ export const categories = categoryConfig.map((category) => ({
   ...category,
   description:
     {
-      laptops: 'Equipos ejecutivos y ultrabooks para movilidad y productividad.',
-      desktops: 'Torres y mini PCs con enfoque en rendimiento y expansión.',
-      gaming: 'Plataformas de alto refresh, GPUs dedicadas y diseño agresivo.',
-      workstations: 'Potencia certificada para diseño, render y flujos profesionales.',
-      monitors: 'Pantallas premium para gaming, productividad y color crítico.',
-      accessories: 'Periféricos de alto valor para setups premium.',
+      laptops: 'Ultrabooks y laptops premium para movilidad, trabajo ejecutivo y productividad de alto nivel.',
+      desktops: 'Torres y mini PCs con presencia más limpia, potencia estable y enfoque en expansión.',
+      gaming: 'Plataformas visualmente impactantes con alto refresh, GPUs dedicadas y gran percepción de valor.',
+      workstations: 'Equipos para diseño, render, CAD y flujos profesionales donde potencia y confiabilidad importan.',
+      monitors: 'Pantallas premium para color crítico, setups elegantes y estaciones de trabajo más completas.',
+      accessories: 'Periféricos seleccionados para elevar la experiencia, el confort y la estética del setup.',
     }[category.id] || '',
+  image: getCategoryPhotos(category.id)[0],
 }))
 
 export const featuredBrands = brands.map((brand, index) => ({
   id: brand.toLowerCase(),
   name: brand,
   share: 12 + index * 3,
+  image: createBrandVisual(
+    brand,
+    ['business', 'desktop', 'gaming', 'workstation', 'monitor', 'accessory'][index % 6],
+  ),
 }))
 
 export const testimonials = [
@@ -978,21 +981,21 @@ export const testimonials = [
     name: 'Alejandra Solano',
     company: 'Studio Pixel',
     quote:
-      'La propuesta transmite valor desde la home hasta la ficha técnica. Se siente lista para presentarse a un cliente exigente.',
+      'La experiencia transmite valor desde la primera pantalla. Se siente más cercana a una marca real que a un simple demo comercial.',
   },
   {
     id: 't2',
     name: 'Jorge Ramírez',
     company: 'CR Gaming Lounge',
     quote:
-      'El comparador y el flujo de reserva son justo lo que un negocio de hardware necesita para convertir sin depender de pago online.',
+      'El catálogo, la ficha de producto y el flujo de reserva ayudan mucho a convertir sin sacrificar una estética premium.',
   },
   {
     id: 't3',
     name: 'Natalia Vargas',
     company: 'Nexa Corporate IT',
     quote:
-      'El panel admin da confianza. Aunque sea mock, parece un producto maduro y muy bien pensado.',
+      'El panel administrativo y la experiencia de tienda se ven consistentes. Da la sensación de un producto más maduro y mejor presentado.',
   },
 ]
 
@@ -1000,17 +1003,17 @@ export const faqItems = [
   {
     question: '¿La reserva realiza un cobro en línea?',
     answer:
-      'No. El flujo está diseñado como solicitud de reserva o cotización. Un asesor confirma disponibilidad y coordina los siguientes pasos.',
+      'No. El flujo funciona como solicitud de reserva o cotización. Un asesor valida disponibilidad, tiempos de entrega y opciones recomendadas antes de cerrar la gestión.',
   },
   {
     question: '¿Puedo solicitar equipos para empresa?',
     answer:
-      'Sí. Hay equipos orientados a oficina, estaciones de trabajo y pedidos corporativos con acompañamiento comercial.',
+      'Sí. Atendemos compras corporativas, setups por volumen, workstations y configuraciones orientadas a oficina o equipos especializados.',
   },
   {
     question: '¿Puedo apartar un monitor o accesorio junto a una laptop?',
     answer:
-      'Sí. El carrito de reserva admite múltiples productos y el asesor consolidará la propuesta final.',
+      'Sí. Puedes combinar laptops, monitores y accesorios en una sola solicitud para recibir una propuesta consolidada y mejor estructurada.',
   },
 ]
 
@@ -1213,13 +1216,17 @@ export const analyticsMock = {
 
 export const storeSettings = {
   storeName: 'AstraCompute',
-  ctaLabel: 'Reservar asesoría',
+  ctaLabel: 'Solicitar asesoría premium',
   primaryColor: '#d6b06b',
   secondaryColor: '#6aa7ad',
   supportEmail: 'hola@astracompute.com',
   supportPhone: '+506 4001-9000',
+  supportAddress: 'San José, Costa Rica',
+  businessHours: 'Lun - Sáb · 8:00am - 6:00pm',
+  mapEmbedUrl: 'https://www.google.com/maps?q=San%20Jos%C3%A9%2C%20Costa%20Rica&z=13&output=embed',
   reserveFlowMessage:
-    'Esta solicitud no realiza un cobro en línea. Nuestro equipo te contactará para confirmar disponibilidad y coordinar la reserva o cotización.',
+    'Esta solicitud no realiza cobro en línea. Nuestro equipo te contactará para confirmar inventario, tiempos, opciones de entrega y la mejor propuesta disponible.',
   brandStory:
-    'Retail tecnológico premium especializado en computadoras de alto rendimiento, workstations y setups para profesionales y gamers.',
+    'Retail tecnológico especializado en computadoras de alto rendimiento, workstations, monitores y setups curados para clientes que valoran diseño, acompañamiento y una experiencia más premium.',
+  promoVisual: getCategoryPhotos('workstations')[0] || createPromoVisual('Bundles premium para setup completo', 'gaming'),
 }

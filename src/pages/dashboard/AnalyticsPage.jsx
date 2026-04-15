@@ -21,7 +21,7 @@ import { useAppStore } from '../../app/store'
 
 function ChartShell({ title, children }) {
   return (
-    <Card sx={{ borderRadius: 5, height: '100%' }}>
+    <Card className="dashboard-panel" sx={{ borderRadius: 4, height: '100%' }}>
       <CardContent sx={{ p: 3, height: '100%' }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
           {title}
@@ -43,11 +43,11 @@ function AnalyticsPage() {
           <ChartShell title="Categorías más visitadas">
             <ResponsiveContainer>
               <BarChart data={analytics.visitsByCategory}>
-                <CartesianGrid stroke="rgba(220,231,255,0.08)" />
-                <XAxis dataKey="category" stroke="#9db0cc" />
-                <YAxis stroke="#9db0cc" />
+                <CartesianGrid stroke="rgba(31,42,51,0.08)" />
+                <XAxis dataKey="category" stroke="#8f8a81" />
+                <YAxis stroke="#8f8a81" />
                 <Tooltip />
-                <Bar dataKey="visits" fill="#4cc9f0" radius={[10, 10, 0, 0]} />
+                <Bar dataKey="visits" fill="#c9a86a" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </ChartShell>
@@ -65,7 +65,7 @@ function AnalyticsPage() {
                   paddingAngle={4}
                 >
                   {analytics.customerMix.map((entry, index) => (
-                    <Cell key={entry.name} fill={index === 0 ? '#4cc9f0' : '#7b61ff'} />
+                    <Cell key={entry.name} fill={index === 0 ? '#c9a86a' : '#8d9ca8'} />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -74,7 +74,7 @@ function AnalyticsPage() {
           </ChartShell>
         </Grid>
       </Grid>
-      <Card sx={{ borderRadius: 5 }}>
+      <Card className="dashboard-panel" sx={{ borderRadius: 4 }}>
         <CardContent sx={{ p: 3 }}>
           <Typography variant="h6" sx={{ mb: 1 }}>
             Métricas demo

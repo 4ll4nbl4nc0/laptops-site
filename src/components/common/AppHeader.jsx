@@ -1,4 +1,5 @@
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded'
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded'
 import Inventory2RoundedIcon from '@mui/icons-material/Inventory2Rounded'
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
@@ -20,6 +21,7 @@ import { alpha } from '@mui/material/styles'
 import { useMemo, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAppStore } from '../../app/store'
+import MotionReveal from './MotionReveal'
 
 const navLinks = [
   ['Inicio', '/'],
@@ -48,9 +50,9 @@ function SearchField({ mobile = false, onNavigate }) {
       placeholder="Buscar laptops, RTX, 32GB RAM, OLED..."
       size="small"
       sx={{
-        minWidth: mobile ? '100%' : 320,
+        minWidth: mobile ? '100%' : { lg: 240, xl: 320 },
         '& .MuiOutlinedInput-root': {
-          bgcolor: alpha('#0d1829', 0.9),
+          bgcolor: alpha('#ffffff', 0.75),
         },
       }}
       InputProps={{
@@ -82,92 +84,133 @@ function AppHeader() {
       color="transparent"
       elevation={0}
       sx={{
-        backdropFilter: 'blur(22px)',
-        borderBottom: '1px solid rgba(220, 231, 255, 0.08)',
+        backdropFilter: 'blur(26px)',
+        borderBottom: '1px solid rgba(31, 42, 51, 0.06)',
+        background: 'linear-gradient(180deg, rgba(251,246,239,0.86), rgba(251,246,239,0.68))',
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ gap: 2 }}>
-          <Stack
-            component={Link}
-            to="/"
-            direction="row"
-            spacing={1.2}
-            alignItems="center"
-            sx={{ mr: 2 }}
+        <Toolbar disableGutters sx={{ py: 1.5 }}>
+          <MotionReveal
+            className="glass-panel elevated-border"
+            sx={{
+              width: '100%',
+              borderRadius: 999,
+              px: { xs: 1, md: 1.3 },
+              py: { xs: 0.9, md: 1.1 },
+            }}
           >
-            <Box
-              sx={{
-                width: 44,
-                height: 44,
-                borderRadius: 3,
-                display: 'grid',
-                placeItems: 'center',
-                bgcolor: 'rgba(76, 201, 240, 0.12)',
-                border: '1px solid rgba(76, 201, 240, 0.2)',
-              }}
-            >
-              <Typography variant="h6" color="primary.main">
-                A
-              </Typography>
-            </Box>
-            <Box>
-              <Typography fontWeight={800}>AstraCompute</Typography>
-              <Typography variant="caption" color="text.secondary">
-                Premium Computer Store
-              </Typography>
-            </Box>
-          </Stack>
-
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{ display: { xs: 'none', md: 'flex' }, mr: 'auto' }}
-          >
-            {navLinks.map(([label, path]) => (
-              <Button
-                key={path}
-                component={NavLink}
-                to={path}
-                color="inherit"
-                sx={{
-                  '&.active': {
-                    color: 'primary.main',
-                  },
-                }}
-              >
-                {label}
-              </Button>
-            ))}
-          </Stack>
-
-          <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
-            <SearchField />
-          </Box>
-
-          <Stack direction="row" spacing={1} alignItems="center">
-            {summary.map((item) => (
-              <IconButton
-                key={item.to}
+            <Stack direction="row" alignItems="center" spacing={1.5}>
+              <Stack
                 component={Link}
-                to={item.to}
+                to="/"
+                direction="row"
+                spacing={1.2}
+                alignItems="center"
+                sx={{ mr: { xs: 'auto', md: 0 }, minWidth: 'fit-content' }}
+              >
+                <Box
+                  sx={{
+                    width: 46,
+                    height: 46,
+                    borderRadius: 3.5,
+                    display: 'grid',
+                    placeItems: 'center',
+                    background:
+                      'linear-gradient(135deg, rgba(234,122,90,0.18), rgba(47,127,121,0.12))',
+                    border: '1px solid rgba(31,42,51,0.08)',
+                  }}
+                >
+                  <Typography variant="h6" color="primary.main">
+                    A
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography fontWeight={800} sx={{ fontSize: { xs: '0.95rem', md: '1rem' } }}>
+                    AstraCompute
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{ display: { xs: 'none', sm: 'block' } }}
+                  >
+                    Premium hardware showroom
+                  </Typography>
+                </Box>
+              </Stack>
+
+              <Stack
+                direction="row"
+                spacing={0.8}
                 sx={{
-                  border: '1px solid rgba(220, 231, 255, 0.08)',
-                  bgcolor: 'rgba(9, 16, 29, 0.75)',
+                  display: { xs: 'none', lg: 'flex' },
+                  mx: 'auto',
+                  p: 0.7,
+                  borderRadius: 999,
+                  border: '1px solid rgba(31,42,51,0.08)',
+                  bgcolor: 'rgba(255,255,255,0.52)',
                 }}
               >
-                <Badge badgeContent={item.count} color="primary">
-                  {item.icon}
-                </Badge>
-              </IconButton>
-            ))}
-            <IconButton
-              onClick={() => setOpen(true)}
-              sx={{ display: { md: 'none' }, border: '1px solid rgba(220, 231, 255, 0.08)' }}
-            >
-              <MenuRoundedIcon />
-            </IconButton>
-          </Stack>
+                {navLinks.map(([label, path]) => (
+                  <Button
+                    key={path}
+                    component={NavLink}
+                    to={path}
+                    color="inherit"
+                    sx={{
+                      px: 1.8,
+                      '&.active': {
+                        color: '#fffdf9',
+                        backgroundImage: 'linear-gradient(135deg, #ea7a5a 0%, #f29a71 100%)',
+                      },
+                    }}
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </Stack>
+
+              <Box sx={{ display: { xs: 'none', xl: 'block' } }}>
+                <SearchField />
+              </Box>
+
+              <Stack direction="row" spacing={1} alignItems="center">
+                {summary.map((item) => (
+                  <IconButton
+                    key={item.to}
+                    component={Link}
+                    to={item.to}
+                    sx={{
+                      border: '1px solid rgba(31, 42, 51, 0.08)',
+                      bgcolor: 'rgba(255, 255, 255, 0.54)',
+                    }}
+                  >
+                    <Badge badgeContent={item.count} color="primary">
+                      {item.icon}
+                    </Badge>
+                  </IconButton>
+                ))}
+                <Button
+                  component={Link}
+                  to="/contacto"
+                  variant="outlined"
+                  endIcon={<KeyboardArrowRightRoundedIcon />}
+                  sx={{ display: { xs: 'none', xl: 'inline-flex' } }}
+                >
+                  Hablar con asesor
+                </Button>
+                <IconButton
+                  onClick={() => setOpen(true)}
+                  sx={{
+                    display: { md: 'none' },
+                    border: '1px solid rgba(31, 42, 51, 0.08)',
+                  }}
+                >
+                  <MenuRoundedIcon />
+                </IconButton>
+              </Stack>
+            </Stack>
+          </MotionReveal>
         </Toolbar>
       </Container>
 
@@ -182,7 +225,12 @@ function AppHeader() {
                 to={path}
                 color="inherit"
                 onClick={() => setOpen(false)}
-                sx={{ justifyContent: 'flex-start' }}
+                sx={{
+                  justifyContent: 'flex-start',
+                  borderRadius: 3,
+                  py: 1.2,
+                  px: 1.4,
+                }}
               >
                 {label}
               </Button>
